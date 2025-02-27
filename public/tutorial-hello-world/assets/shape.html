@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Shape Test</title>
+        <script src="https://d3js.org/d3.v7.js"></script>
+        <!-- Load revisit-communicate to be able to send data to reVISit -->
+        <script src="../../revisitUtilities/revisit-communicate.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="header">How related are these items?</h1>
+            <div class="question">
+                <svg></svg>
+                <div class="text">Sample Text</div>            
+            </div>
+        </div>
+    </body>
+
+    <script>
+        // Get data from the config file
+        Revisit.onDataReceive((data) => {
+            const shape = data['shape']
+            const text = data['text']
+
+            var text_div = document.getElementsByClassName('text')[0]
+            if (text_div) {text_div.textContent = text}
+
+            height = 100;
+            width = 100;
+            padding = 25;
+            svg = d3.select('svg');
+            svg.attr('width', width + 2 * padding)
+                .attr('height', height + 2 * padding);
+            
+            if (shape == "square"){
+                svg.append('rect')
+                    .attr("x", padding)
+                    .attr("y", padding)
+                    .attr("width", width)
+                    .attr("height", height)
+                    .style("fill", "black")
+            } else if (shape == "circle") {
+                svg.append('circle')
+                    .attr("cx", width / 2 + padding)
+                    .attr("cy", height / 2 + padding)
+                    .attr("r", width / 2)
+                    .style("fill", "black")                
+            }
+        });
+    </script>
+    
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;    
+            text-align: center;       
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+
+        .question {
+            margin: auto;
+            width: 70%;
+            display: flex;
+        }
+
+        svg {
+            margin: auto;
+        }
+
+        .text {
+            margin: auto;
+            font-size: 15px;
+        }
+    </style>
+</html>
+
+
