@@ -1,6 +1,4 @@
 import revisitpy as rvt
-import revisitpy_server as rs
-import random
 
 full_sequence = []
 
