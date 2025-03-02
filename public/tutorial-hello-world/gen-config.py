@@ -42,7 +42,6 @@ welcome = rvt.component(
     response = []
 )
 
-full_sequence.append(welcome)
 
 base_response = rvt.response(
     id="html-response",
@@ -71,8 +70,6 @@ base_component = rvt.component(
 )
 
 id = 0
-random.shuffle(shapes)
-random.shuffle(transit)
 for shape in shapes:
     for type in transit:
         temp_name = 'shape-word-compare-' + str(id)
@@ -89,10 +86,16 @@ for shape in shapes:
         full_sequence.append(temp_component)
         id += 1
 
-sequence = rvt.sequence(
+first_sequence = rvt.sequence(
     order='fixed',
+    components=[welcome]
+)
+second_sequence = rvt.sequence(
+    order='random',
     components=full_sequence
 )
+
+sequence = first_sequence + second_sequence
 
 study = rvt.studyConfig(
     schema="https://raw.githubusercontent.com/revisit-studies/study/v2.0.2/src/parser/StudyConfigSchema.json",
@@ -101,6 +104,11 @@ study = rvt.studyConfig(
     sequence=sequence
 )
 
-process = rs.serve()
-w = rvt.widget(study, server=True)
-w
+#print(study)
+
+with open("config.txt", 'w') as file:
+    file.write(str(study))
+
+# process = rs.serve()
+# w = rvt.widget(study, server=True)
+# w
