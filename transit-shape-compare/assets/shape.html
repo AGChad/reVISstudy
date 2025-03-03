@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Shape Test</title>
+        <script src="https://d3js.org/d3.v7.js"></script>
+        <!-- Load revisit-communicate to be able to send data to reVISit -->
+        <script src="../../revisitUtilities/revisit-communicate.js"></script>
+    </head>
+
+    <body>
+        <h1 class="header">How related is this shape and mode of transit?</h1>
+        <div class="question">
+            <div class="shape"></div>
+            <div class="text"></div>            
+        </div>
+    </body>
+
+    <script>
+        // Get data from the config file
+        Revisit.onDataReceive((data) => {
+            const shape = data['shape']
+            const text = data['text']
+
+            const text_div = document.querySelector(".text")
+            const shape_div = document.querySelector(".shape")
+
+            if (text_div) text_div.textContent = text.charAt(0).toUpperCase() + text.slice(1)
+
+            d3.xml(`./shapes/${shape}.svg`)
+            .then(data => {
+                shape_div.appendChild(data.documentElement)
+            });
+        });
+    </script>
+    
+    <style>
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;    
+            text-align: center;
+            height: 100%;  
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        .question {
+            width: 70%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: auto;
+            flex-grow: 1;
+        }
+
+        svg {
+            margin: auto;
+            width: 150px;
+            height: 150px;
+        }
+
+        .text {
+            font-size: 30px;
+        }
+    </style>
+</html>
+
+

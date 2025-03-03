@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v2.0.2/src/parser/GlobalConfigSchema.json",
+  "configsList": [
+    "transit-shape-compare"
+  ],
+  "configs": {
+    "transit-shape-compare": {
+      "path": "transit-shape-compare/config.json"
+    }
+  }
+}
