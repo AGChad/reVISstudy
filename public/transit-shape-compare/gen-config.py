@@ -6,27 +6,27 @@ shapes = ["rect", "circle", "triangle", "plus", "diamond", "badge", "cresent"]
 transit = ["walk", "bicycle", "car", "train", "plane", "bus", "boat"]
 
 study_metadata = rvt.studyMetadata(
-    title = "A tutorial that you will build with us",
+    title = "Comparing Shapes and Modes of Transit",
     version = "development",
     authors = [
-      "The reVISit Team",
-      "The reVISit Community",
-      "You :)"
+        "The reVISit Team",
+        "The reVISit Community",
+        "Ava Chadbourne, Sam Randa, Ivy Bixler"
     ],
     date = "2025-02-05",
-    description = "This tutorial will teach you how to create a reVISit study and use all of the features that reVISit has to offer.",
+    description = "This study asks you to compare various shapes and modes of transit",
     organizations = [
       "University of Utah",
       "WPI",
       "University of Toronto",
-      "You :)"
+      "Some really tired college kids"
     ]
 )
 
 ui_config = rvt.uiConfig(
     contactEmail="contact@revisit.dev",
-    helpTextPath="./public/transit-shape-compare/assets/help.md",
-    logoPath="./public/revisitAssets/revisitLogoSquare.svg",
+    helpTextPath="./transit-shape-compare/assets/help.md",
+    logoPath="./revisitAssets/revisitLogoSquare.svg",
     withProgressBar=True,
     autoDownloadStudy=False,
     autoDownloadTime=5000,
@@ -36,7 +36,7 @@ ui_config = rvt.uiConfig(
 welcome = rvt.component(
     component_name__='welcome',
     type= "markdown",
-    path ="./public/transit-shape-compare/assets/welcome.md",
+    path ="./transit-shape-compare/assets/welcome.md",
     response = []
 )
 
@@ -64,7 +64,7 @@ base_component = rvt.component(
     component_name__='shape-word-compare',
     type='website',
     response=[base_response],
-    path="./public/transit-shape-compare/assets/shape.html"
+    path="./transit-shape-compare/assets/shape.html"
 )
 
 id = 0
