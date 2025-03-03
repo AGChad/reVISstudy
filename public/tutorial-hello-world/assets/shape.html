@@ -12,7 +12,7 @@
         <div class="container">
             <h1 class="header">How related are these items?</h1>
             <div class="question">
-                <svg></svg>
+                <div class="shape"></div>
                 <div class="text">Sample Text</div>            
             </div>
         </div>
@@ -24,30 +24,15 @@
             const shape = data['shape']
             const text = data['text']
 
-            var text_div = document.getElementsByClassName('text')[0]
-            if (text_div) {text_div.textContent = text}
+            const text_div = document.querySelector(".text")
+            const shape_div = document.querySelector(".shape")
 
-            height = 100;
-            width = 100;
-            padding = 25;
-            svg = d3.select('svg');
-            svg.attr('width', width + 2 * padding)
-                .attr('height', height + 2 * padding);
-            
-            if (shape == "square"){
-                svg.append('rect')
-                    .attr("x", padding)
-                    .attr("y", padding)
-                    .attr("width", width)
-                    .attr("height", height)
-                    .style("fill", "black")
-            } else if (shape == "circle") {
-                svg.append('circle')
-                    .attr("cx", width / 2 + padding)
-                    .attr("cy", height / 2 + padding)
-                    .attr("r", width / 2)
-                    .style("fill", "black")                
-            }
+            if (text_div) text_div.textContent = text
+
+            d3.xml(`./shapes/${shape}.svg`)
+            .then(data => {
+                shape_div.appendChild(data.documentElement)
+            });
         });
     </script>
     

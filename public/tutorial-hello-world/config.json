@@ -1185,7 +1185,7 @@
         "shape-word-compare-42": {
             "description": "Rate the similarity between the shape and the word",
             "parameters": {
-                "shape": "cresent",
+                "shape": "crescent",
                 "text": "walk"
             },
             "path": "./public/tutorial-hello-world/assets/shape.html",
@@ -1213,7 +1213,7 @@
         "shape-word-compare-43": {
             "description": "Rate the similarity between the shape and the word",
             "parameters": {
-                "shape": "cresent",
+                "shape": "crescent",
                 "text": "bicycle"
             },
             "path": "./public/tutorial-hello-world/assets/shape.html",
@@ -1241,7 +1241,7 @@
         "shape-word-compare-44": {
             "description": "Rate the similarity between the shape and the word",
             "parameters": {
-                "shape": "cresent",
+                "shape": "crescent",
                 "text": "car"
             },
             "path": "./public/tutorial-hello-world/assets/shape.html",
@@ -1269,7 +1269,7 @@
         "shape-word-compare-45": {
             "description": "Rate the similarity between the shape and the word",
             "parameters": {
-                "shape": "cresent",
+                "shape": "crescent",
                 "text": "train"
             },
             "path": "./public/tutorial-hello-world/assets/shape.html",
@@ -1297,7 +1297,7 @@
         "shape-word-compare-46": {
             "description": "Rate the similarity between the shape and the word",
             "parameters": {
-                "shape": "cresent",
+                "shape": "crescent",
                 "text": "plane"
             },
             "path": "./public/tutorial-hello-world/assets/shape.html",
@@ -1325,7 +1325,7 @@
         "shape-word-compare-47": {
             "description": "Rate the similarity between the shape and the word",
             "parameters": {
-                "shape": "cresent",
+                "shape": "crescent",
                 "text": "bus"
             },
             "path": "./public/tutorial-hello-world/assets/shape.html",
@@ -1353,7 +1353,7 @@
         "shape-word-compare-48": {
             "description": "Rate the similarity between the shape and the word",
             "parameters": {
-                "shape": "cresent",
+                "shape": "crescent",
                 "text": "boat"
             },
             "path": "./public/tutorial-hello-world/assets/shape.html",
