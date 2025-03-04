@@ -10,8 +10,10 @@
 
     <body>
         <h1 class="header">How related is this shape and mode of transit?</h1>
-        <div class="question">
-            <div class="shape"></div>
+        <div class="question">  
+            <div class="shape">
+                <p class="number"></p>
+            </div>
             <div class="text"></div>            
         </div>
     </body>
@@ -19,19 +21,28 @@
     <script>
         // Get data from the config file
         Revisit.onDataReceive((data) => {
+            const random_number = Math.floor(Math.random() * 98) + 1;
             const shape = data['shape']
             const text = data['text']
+            const number = data['number']
 
             const text_div = document.querySelector(".text")
             const shape_div = document.querySelector(".shape")
+            const number_p = document.querySelector(".number")
 
             if (text_div) text_div.textContent = text.charAt(0).toUpperCase() + text.slice(1)
 
             d3.xml(`./shapes/${shape}.svg`)
-            .then(data => {
-                shape_div.appendChild(data.documentElement)
-            });
+            .then(data => shape_div.appendChild(data.documentElement))
+            .then(data => number_p.textContent = random_number);
+            const shapeEq = (t) => shape === t;
+            if(shapeEq("badge")) number_p.style.transform = "translate(-50%, -125%)";
+            if(shapeEq("triangle")) number_p.style.transform = "translate(-50%, -100%)";
+            if(shapeEq("crescent")) number_p.style.transform = "translate(-50%, -130%)";
+            
         });
+        
+
     </script>
     
     <style>
@@ -47,6 +58,24 @@
             display: flex;
             flex-direction: column;
             margin: 0;
+        }
+
+        .shape {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -136%);
+            font-size: 60px;
+            color: white;
+            text-align: center;
+            width: 100%;
         }
 
         .question {
@@ -67,6 +96,8 @@
         .text {
             font-size: 30px;
         }
+        
+        
     </style>
 </html>
 
