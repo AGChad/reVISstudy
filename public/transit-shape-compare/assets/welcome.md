@@ -1,3 +1,3 @@
 # Welcome to the Tutorial
 
-This study is an example study that a tutorial attendee can use to learn how to use ReVISit. The study is designed to be simple and easy to build, and it is intended to be used as a starting point for building your own studies. The study walks you through the process of building a study, and it provides examples of how to use ReVISit to create a variety of different types of stimuli and collect data.
+This is a shape association study being conducted for a3 in data visualization. The goal of the study is to show the relation between a mode of transit and a shape. Each shape can be thought of as a key on a map. 
