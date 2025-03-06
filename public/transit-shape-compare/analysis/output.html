@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Shape Test</title>
+        <script src="https://d3js.org/d3.v7.js"></script>
+    </head>
+
+    <body>
+        <div id="dataviz">
+        
+        </div>
+    </body>
+
+    <script>
+        function getAvg(arr) {
+            if (arr.length === 0) return 'Empty array';
+            return arr.reduce((acc, c) => acc + c, 0) / arr.length;
+        }
+
+        const shapes = ["rect", "circle", "triangle", "plus", "diamonde", "badge", "crescent"];
+        const modes = ["walk", "bicycle", "car", "train", "plane", "bus", "boat"];
+
+        const margin = {top: 50, right: 50, bottom: 50, left: 50},
+            width = 600 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
+
+        const svg = d3.select("#dataviz")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleBand()
+            .range([ 0, width ])
+            .domain(shapes)
+            .padding(0.01);
+            svg.append("g")
+            .attr("transform", `translate(0, ${height})`)
+            .call(d3.axisBottom(x))
+
+        const y = d3.scaleBand()
+            .range([ height, 0 ])
+            .domain(modes)
+            .padding(0.01);
+            svg.append("g")
+            .call(d3.axisLeft(y));
+
+        const myColor = d3.scaleLinear()
+            .range(["white", "#035CB5"])
+            .domain([1,10])
+
+        d3.csv("./results.csv").then(function(results) {
+            var answers = new Array(49);
+            for (const result of results) {
+                if (result.trialId == "participantTags") continue;
+
+                const question = parseInt(result.trialId.substring(19));
+                result.question_num = question;
+                result.shape = shapes[Math.floor(question / 7)];
+                result.mode = modes[question % 7];
+
+                if(answers[question - 1] === undefined){
+                    answers[question - 1] = [+result.answer]
+                } else {
+                    answers[question - 1].push(+result.answer)
+                }
+
+                
+            }
+
+
+            svg.selectAll()
+                .data(results, function(d) {return d.shape+':'+d.mode;})
+                .join("rect")
+                .attr("x", function(d) { return x(d.shape) })
+                .attr("y", function(d) { return y(d.mode) })
+                .attr("width", x.bandwidth() )
+                .attr("height", y.bandwidth() )
+                .style("fill", function(d) { 
+                    if (d.trialId == "participantTags") return;
+                    var value = getAvg(answers[(d.question_num) - 1])
+                    return myColor(value)} )
+        });
+
+    </script>
+    
+    <style>
+        #dataviz {
+            margin: auto;
+            width: 90%;
+        }
+
+        svg {
+            display: block;
+            margin: auto;
+        }
+    </style>
+</html>
+
+
