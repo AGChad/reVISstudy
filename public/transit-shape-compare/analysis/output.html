@@ -61,10 +61,10 @@
                 result.shape = shapes[Math.floor(question / 7)];
                 result.mode = modes[question % 7];
 
-                if(answers[question - 1] === undefined){
-                    answers[question - 1] = [+result.answer]
+                if(answers[question] === undefined){
+                    answers[question] = [+result.answer]
                 } else {
-                    answers[question - 1].push(+result.answer)
+                    answers[question].push(+result.answer)
                 }
 
                 
@@ -72,17 +72,21 @@
 
 
             svg.selectAll()
-                .data(results, function(d) {return d.shape+':'+d.mode;})
+                .data(d3.range(49))
                 .join("rect")
-                .attr("x", function(d) { return x(d.shape) })
-                .attr("y", function(d) { return y(d.mode) })
+                .attr("x", function(d) { return x(shapes[Math.floor(d / 7)]) })
+                .attr("y", function(d) { return y(modes[d % 7]) })
                 .attr("width", x.bandwidth() )
                 .attr("height", y.bandwidth() )
                 .style("fill", function(d) { 
                     if (d.trialId == "participantTags") return;
-                    var value = getAvg(answers[(d.question_num) - 1])
+                    var value = getAvg(answers[d])
                     return myColor(value)} )
+            
+            console.log(answers)
         });
+
+        
 
     </script>
     
