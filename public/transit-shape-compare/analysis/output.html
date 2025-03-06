@@ -18,6 +18,15 @@
             return arr.reduce((acc, c) => acc + c, 0) / arr.length;
         }
 
+        function std(arr, usePopulation = false){
+            const mean = arr.reduce((acc, val) => acc + val, 0) / arr.length;
+
+            const sumOfSquaredDifferences = arr.reduce((acc, val) => acc.concat((val - mean) ** 2), [])
+                                                .reduce((acc, val) => acc + val, 0);
+            
+            return Math.sqrt(sumOfSquaredDifferences / (arr.length - (usePopulation ? 0 : 1)));
+        };
+
         const shapes = ["rect", "circle", "triangle", "plus", "diamonde", "badge", "crescent"];
         const modes = ["walk", "bicycle", "car", "train", "plane", "bus", "boat"];
 
@@ -65,10 +74,18 @@
                     answers[question] = [+result.answer]
                 } else {
                     answers[question].push(+result.answer)
-                }
-
-                
+                }                
             }
+
+            //This code was used for generating the std heatmap but is currently unused
+            var stds = [];
+            for (var i = 0; i < answers.length; i++) {
+                stds.push(std(answers[i]))
+            }
+
+            const stdColor = d3.scaleLinear()
+                .range(["white", "#DF572A"])
+                .domain([Math.min(...stds), Math.max(...stds)])
 
 
             svg.selectAll()
@@ -82,8 +99,6 @@
                     if (d.trialId == "participantTags") return;
                     var value = getAvg(answers[d])
                     return myColor(value)} )
-            
-            console.log(answers)
         });
 
         
